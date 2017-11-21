@@ -17,6 +17,8 @@
 #define __SERIAL_H__
 
 #include <string>
+#ifdef _WIN32
+
 #include <windows.h>
 
 typedef std::basic_string<TCHAR> tstring;
@@ -54,5 +56,5 @@ public:
 	// Flushes everything from the serial port's read buffer
 	void flush();
 };
-
+#endif
 #endif

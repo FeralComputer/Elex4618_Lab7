@@ -8,16 +8,24 @@
 #include <string>
 #include <iostream>
 #include <thread>
-
+#ifdef _WIN32
 #include "Client.h"
 #include "Server.h"
 #include "Serial.h" // Must include Windows.h after Winsock2.h, so Serial must include after Client/Server
+#endif
+#include "Tracker.h"
 
 // OpenCV Include
+#ifdef _WIN32
 #include "opencv.hpp"
+#elif linux
+#include <opencv2/opencv.hpp>
+#endif
 
 // OpenCV Library
+#ifdef _WIN32
 #pragma comment(lib,".\\opencv\\lib\\opencv_world310d.lib")
+
 
 ////////////////////////////////////////////////////////////////
 // Serial Communication
@@ -193,11 +201,15 @@ void clientserver()
     }
   }
 }
+#endif
 
 int main(int argc, char* argv[])
 {
 	//test_com();
 	//do_image();
 	//do_video ();
-  clientserver();
+  //clientserver();
+	CTracker tracker;
+	tracker.run();
+	return 0;
 }
